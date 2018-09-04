@@ -5,11 +5,21 @@ spring:
     jackson:
         serialization:
             write-dates-as-timestamps: true
+    redis:
+      host: 37.107.247.51
+      password: "!awei0302"
+      port: 6379
+      timeout: 10000
+#      lettuce:
+#        pool:
+#          max-active: 8
     datasource:
         url: jdbc:mysql://127.0.0.1:3306/api?useUnicode=true&characterEncoding=UTF-8&useSSL=false
-        username: 
-        password: 
+        username: root
+        password: root
     jpa:
+        hibernate:
+          ddl-auto: update
         show-sql: true
 
 management:

@@ -13,13 +13,16 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.mtdhb.api.configuration.NodejsConfiguration;
 import com.mtdhb.api.constant.e.ThirdPartyApplication;
 import com.mtdhb.api.dto.Result;
 import com.mtdhb.api.dto.UserDTO;
+import com.mtdhb.api.dto.UserWXDTO;
 import com.mtdhb.api.service.CookieService;
 import com.mtdhb.api.service.ReceivingService;
 import com.mtdhb.api.util.Results;
 import com.mtdhb.api.web.RequestContextHolder;
+import com.mtdhb.api.web.RequestWXContextHolder;
 
 /**
  * @author i@huangdenghe.com
@@ -27,6 +30,9 @@ import com.mtdhb.api.web.RequestContextHolder;
  */
 @RestController
 public class HomeController {
+	
+	@Autowired
+    private NodejsConfiguration nodejsConfiguration;
 
     @Autowired
     private CookieService cookieService;
@@ -39,12 +45,27 @@ public class HomeController {
     public Result user(HttpSession session) {
         UserDTO userDTO = RequestContextHolder.get();
         // 只在注册和登录接口返回 token
-        userDTO.setToken(null);
+	        userDTO.setToken(null);
+        return Results.success(userDTO);
+    }
+    
+    @RequestMapping("/userwx")
+    public Result userwx(HttpSession session) {
+        UserWXDTO userDTO = RequestWXContextHolder.get();
+        // 只在注册和登录接口返回 token
+	        userDTO.setToken(null);
         return Results.success(userDTO);
     }
 
     @RequestMapping("/zhuangbi")
     public Result carousel() {
+    	
+    	nodejsConfiguration.getGetHongbao();
+    	nodejsConfiguration.getUrl();
+    	nodejsConfiguration.getCheckCookie();
+    	System.out.println("nodejsConfiguration.getGetHongbao();"+nodejsConfiguration.getGetHongbao());
+    	System.out.println("nodejsConfiguration.getUrl();"+nodejsConfiguration.getUrl());
+    	System.out.println("nodejsConfiguration.getCheckCookie();"+nodejsConfiguration.getCheckCookie());
         return Results.success(receivingService.listReceivingCarousel());
     }
 

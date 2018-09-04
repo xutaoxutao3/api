@@ -156,7 +156,6 @@ public class UserServiceImpl implements UserService {
                 mailConfiguration.getResetPasswordMailTemplate());
     }
 
-    @Cacheable(cacheNames = "USER_SESSION")
     @Override
     public UserDTO getByToken(String token) {
         User user = userRepository.findByToken(token);

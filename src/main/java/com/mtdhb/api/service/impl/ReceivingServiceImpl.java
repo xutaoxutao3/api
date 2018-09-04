@@ -252,6 +252,7 @@ public class ReceivingServiceImpl implements ReceivingService {
         ThirdPartyApplication application = receiving.getApplication();
         LinkedBlockingQueue<Cookie> queue = queues.get(application.ordinal());
         try {
+//        	url 红包地址 phone 
             ResultDTO<RedPacketDTO> resultDTO = nodejsService.getHongbao(url, phone, application, available, cookies);
             RedPacketDTO redPacketDTO = resultDTO.getData();
             if (redPacketDTO == null) {
