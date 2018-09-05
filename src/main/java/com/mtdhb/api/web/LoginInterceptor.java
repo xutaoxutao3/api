@@ -71,7 +71,7 @@ public class LoginInterceptor extends HandlerInterceptorAdapter {
         if (userwxDTO != null){
            RequestWXContextHolder.set(userwxDTO);
         }
-       
+        /*  
         if(userDTO==null && userwxDTO == null){
         	throw new BusinessException(ErrorCode.AUTHENTICATION_EXCEPTION,
                     "method={}, uri={}, userToken={}, userDTO={},userwxDTO={}", method, uri, userToken, userDTO,userwxDTO);
@@ -85,7 +85,7 @@ public class LoginInterceptor extends HandlerInterceptorAdapter {
             throw new BusinessException(ErrorCode.USER_LOCKED, "method={}, uri={}, userToken={}, userDTO={}", method,
                     uri, userToken, userDTO);
         }
-        /**/
+       */
         
         return true;
     }
